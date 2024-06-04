@@ -13,6 +13,7 @@ public class RainbowCatAdventure : MonoBehaviour
     int score = 0;
     Hashtable directionWithCats = new Hashtable();
     string rightAnswerColor, rightAnswerDirection;
+    private float timer = 5f;
 
     void Start()
     {
@@ -21,7 +22,11 @@ public class RainbowCatAdventure : MonoBehaviour
 
     void Update()
     {
-
+        timer -= Time.deltaTime;
+        if (timer  <= 0f)
+        {
+            InitializeGame();
+        }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
@@ -84,6 +89,7 @@ public class RainbowCatAdventure : MonoBehaviour
 
     void InitializeGame()
     {
+        timer = 5f ;
         randomColors.Clear();
         directionWithCats.Clear();
         SetRandomCatImages();
