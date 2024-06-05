@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RainbowCatAdventure : MonoBehaviour
 {
@@ -102,6 +103,8 @@ public class RainbowCatAdventure : MonoBehaviour
         {
             case 0:
             GameObject.Find("HeartImage1").GetComponent<Image>().enabled = false;
+            PlayerPrefs.SetInt("FinalScore", score);
+            SceneManager.LoadScene("GameOverScene");
                 break;
 
             case 1:
