@@ -15,6 +15,8 @@ public class RainbowCatAdventure : MonoBehaviour
     string rightAnswerColor, rightAnswerDirection;
     private float timer = 5f;
 
+    int lives = 3;
+
     void Start()
     {
         InitializeGame();
@@ -22,11 +24,7 @@ public class RainbowCatAdventure : MonoBehaviour
 
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer  <= 0f)
-        {
-            InitializeGame();
-        }
+
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
@@ -39,6 +37,7 @@ public class RainbowCatAdventure : MonoBehaviour
             else
             {
                 PlayAudioSource("angry-meow");
+                lives--;
             }
 
         }
@@ -53,6 +52,7 @@ public class RainbowCatAdventure : MonoBehaviour
             else
             {
                 PlayAudioSource("angry-meow");
+                lives--;
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
@@ -67,6 +67,7 @@ public class RainbowCatAdventure : MonoBehaviour
             else
             {
                 PlayAudioSource("angry-meow");
+                lives--;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
@@ -80,8 +81,36 @@ public class RainbowCatAdventure : MonoBehaviour
             else
             {
                 PlayAudioSource("angry-meow");
+                lives--;
             }
 
+
+        }
+
+    }
+
+
+    void FixedUpdate()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 0f)
+        {
+            lives--;
+            InitializeGame();
+        }
+                switch (lives)
+        {
+            case 0:
+            GameObject.Find("HeartImage1").GetComponent<Image>().enabled = false;
+                break;
+
+            case 1:
+            GameObject.Find("HeartImage2").GetComponent<Image>().enabled = false;
+                break;
+
+            case 2:
+            GameObject.Find("HeartImage3").GetComponent<Image>().enabled = false;
+                break;
 
         }
     }
@@ -89,7 +118,7 @@ public class RainbowCatAdventure : MonoBehaviour
 
     void InitializeGame()
     {
-        timer = 5f ;
+        timer = 5f;
         randomColors.Clear();
         directionWithCats.Clear();
         SetRandomCatImages();
