@@ -10,10 +10,15 @@ public class GameOverSceneManager : MonoBehaviour
     {
         int FinalScore = PlayerPrefs.GetInt("FinalScore", 0);
         GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>().text = FinalScore.ToString();
+        PlayAudioSource("game-over");
     }
 
-    void Update()
+
+    void PlayAudioSource(string audioClipName)
     {
-        
+        AudioSource audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
+        audioSource.clip = Resources.Load<AudioClip>("Sounds/" + audioClipName);
+        audioSource.Play();
+
     }
 }
